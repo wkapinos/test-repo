@@ -1,0 +1,33 @@
+# .github/workflows/deploy.yml
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest # Środowisko, na którym będzie działać workflow
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4 # Pobiera kod z repozytorium
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # Upewnij się, że używasz wersji Node.js kompatybilnej z Twoim projektem
+
+      - name: Install dependencies
+        run: npm install # Instaluje zależności z package.json
+
+      - name: Build project
+        run: npm run build # Uruchamia komendę budowania Vite
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4 # Akcja do wdrażania na gh-pages
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }} # Dostęp do tokenu GitHub
+          publish_dir: ./dist # Katalog, który ma zostać opublikowany (domyślny dla Vite)
+          # publish_branch: gh-pages # Domyślnie wdraża do gałęzi 'gh-pages', możesz to jawnie określić
