@@ -29,21 +29,25 @@ async function fetchArticles() {
     }
 }
 
+async function initializeApp() {
+    const articles = await fetchArticles();
 
-const articles = await fetchArticles();
+    let table= '<table class="table table-striped table-bordered">';
 
-let table= '<table class="table table-striped table-bordered">';
+    table += '<tr><th>Title</th><th>Cos tam</th></tr>';
 
-table += '<tr><th>Title</th><th>Cos tam</th></tr>';
+    articles.forEach(article => {
+        table += `<tr><td>${article.title}</td><td>${article.subtitle}</td></tr>`;
+    })
 
-articles.forEach(article => {
-    table += `<tr><td>${article.title}</td><td>${article.subtitle}</td></tr>`;
-})
-
-table += '</table>';
+    table += '</table>';
 
 
-document.querySelector('#app').innerHTML = `
+    document.querySelector('#app').innerHTML = `
   <h1>Hello Vite!</h1>
   ${table}
 `;
+
+}
+
+initializeApp()
