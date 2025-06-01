@@ -34,20 +34,21 @@ async function initializeApp() {
 
     let table= '<table class="table table-striped table-bordered">';
 
-    table += '<tr><th>Title</th><th>Cos tam</th></tr>';
+    table += '<tr>' +
+        '<th>Tytuł</th>' +
+        '<th>Podtytuł</th>' +
+        '<th>Autor</th>' +
+        '<th>Data utworzenia</th>' +
+        '<th>Treść</th></tr>';
 
     articles.forEach(article => {
-        table += `<tr><td>${article.title}</td><td>${article.subtitle}</td></tr>`;
+        table += `<tr><td>${article.title}</td><td>${article.subtitle}</td><td>${article.author}</td><td>${article.created_at}</td><td>${article.content}</td></tr>`;
     })
 
     table += '</table>';
 
 
-    document.querySelector('#app').innerHTML = `
-  <h1>Hello Vite!</h1>
-  ${table}
-`;
-
+    document.querySelector('#app').innerHTML = `${table}`;
 }
 
 initializeApp()
