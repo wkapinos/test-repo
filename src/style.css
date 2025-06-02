@@ -81,7 +81,7 @@ button:hover {
 
 /* Formularz */
 .form-container {
-    position: fixed;
+    position:relative;
     background: white;
     border-radius: 16px;
     padding: 2rem;
